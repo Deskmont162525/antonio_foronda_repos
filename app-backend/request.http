@@ -1,0 +1,73 @@
+###
+POST http://localhost:9000/api/users/signup HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "deskmont16@outlook.es",
+  "password": "Nikola Tesla",
+  "name": "Soy el mejor",
+  "lastName": "y progresando"
+}
+
+
+###
+POST http://localhost:9000/api/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email":"deskmont16@outlook.es",
+  "password": "Nikola Tesla"
+}
+
+
+
+###
+GET http://localhost:9000/api/users/users HTTP/1.1
+
+###
+GET http://localhost:9000/api/users/user/6414b65ac0385947117674ed HTTP/1.1
+
+###
+DELETE http://localhost:9000/api/users/user/6414b65ac0385947117674ed HTTP/1.1
+
+###
+PUT http://localhost:9000/api/users/user/6414b65ac0385947117674ed HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "John Conway 2",
+  "lastName": "y progresando",
+  "email": "johnconway@email.com",
+  "password": "Nikola Tesla"
+}
+
+
+# metodos para rol
+###
+POST http://localhost:9000/api/rols/rol HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "User",
+  "permissions": ["read", "write", "update"]
+}
+
+###
+GET http://localhost:9000/api/rols/rol HTTP/1.1
+
+###
+GET http://localhost:9000/api/rols/rol/6414949ab4d71cbfeced1c9c HTTP/1.1
+
+###
+DELETE http://localhost:9000/api/rols/rol/6414949ab4d71cbfeced1c9c HTTP/1.1
+
+###
+PUT http://localhost:9000/api/rols/rol/6414949ab4d71cbfeced1c9c HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "John Conway 2",
+  "lastName": "y progresando",
+  "email": "johnconway@email.com",
+  "password": "Nikola Tesla"
+}

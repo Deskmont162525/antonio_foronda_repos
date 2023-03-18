@@ -1,0 +1,74 @@
+
+# metodos para product
+###
+POST http://localhost:9000/api/products/product HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer 
+
+
+{
+  "name": "Producto de ejemplo 6",
+  "price": 19.99,
+  "rating": 4.5,
+  "image": "https://ejemplo.com/imagen",
+  "createdBy": "6414e88c28384c0ba3a0ebeb",
+  "categories": ["6414ee6045237f57bfac8928","641505073f1898ca307d4b61"]
+}
+
+###
+GET http://localhost:9000/api/products/product HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTRlODhjMjgzODRjMGJhM2EwZWJlYiIsImlhdCI6MTY3OTEwMjA4MCwiZXhwIjoxNjc5MTA1NjgwfQ.R0N2NxUJOAk0W5ihCzRTDp3V1gQ8HkJW785We_qoSwE
+
+###productByUser
+GET http://localhost:9000/api/products/productByUser/6414e88c28384c0ba3a0ebeb HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTRlODhjMjgzODRjMGJhM2EwZWJlYiIsImlhdCI6MTY3OTEwMjA4MCwiZXhwIjoxNjc5MTA1NjgwfQ.R0N2NxUJOAk0W5ihCzRTDp3V1gQ8HkJW785We_qoSwE
+
+
+###
+GET http://localhost:9000/api/products/product/6414e8a228384c0ba3a0ebef HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTRlODhjMjgzODRjMGJhM2EwZWJlYiIsImlhdCI6MTY3OTEwMjA4MCwiZXhwIjoxNjc5MTA1NjgwfQ.R0N2NxUJOAk0W5ihCzRTDp3V1gQ8HkJW785We_qoSwE
+
+###
+DELETE http://localhost:9000/api/products/product/6414e8a228384c0ba3a0ebef HTTP/1.1
+
+###
+PUT http://localhost:9000/api/products/product/6414e8a228384c0ba3a0ebef HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTRlODhjMjgzODRjMGJhM2EwZWJlYiIsImlhdCI6MTY3OTEwMjA4MCwiZXhwIjoxNjc5MTA1NjgwfQ.R0N2NxUJOAk0W5ihCzRTDp3V1gQ8HkJW785We_qoSwE
+
+{
+  "name": "Producto de ejemplo 60",
+  "price": 59.99,
+  "rating": 2.5,
+  "image": "https://ejemplo.com/imagen",
+  "createdBy": "615fc6f10fc163c67b6d7d6c",
+  "categories": ["6414ee6045237f57bfac8928","6414ee6045237f57bfac8928"]
+}
+
+
+# metodos para categorias
+###
+POST http://localhost:9000/api/categorys/category HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Robotics",
+"description": "This category contains robotica items"
+}
+###
+GET http://localhost:9000/api/categorys/category HTTP/1.1
+
+###
+GET http://localhost:9000/api/categorys/category/6414ee6045237f57bfac8928 HTTP/1.1
+
+###
+DELETE http://localhost:9000/api/categorys/category/6414ee6045237f57bfac8928 HTTP/1.1
+
+###
+PUT http://localhost:9000/api/categorys/category/6414ee6045237f57bfac8928 HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Electronics",
+"description": "This category contains electronic items and computers"
+}

@@ -1,0 +1,27 @@
+// Importamos el archivo de variables
+@import 'variables';
+
+// Definimos estilos globales
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+// Agregamos estilos específicos del componente
+.login-form {
+  input {
+    margin-top: 50px;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    background-color: $primary-color;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+  }
+}
