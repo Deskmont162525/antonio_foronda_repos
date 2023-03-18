@@ -1,0 +1,31 @@
+// Importamos el archivo de variables
+@import 'variables';
+
+// Estilos para botones
+.btn {
+    &--principal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 148px;
+      height: 42px;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+  
+      &--secondary {
+        background-color: $white;
+        border: 1px solid $blue-primary;
+        color: $blue-primary;
+  
+        &:hover {
+          background-color: $blue-primary;
+          border: 1px solid $blue-primary;
+          color: $white;
+        }
+      }
+    }
+  }

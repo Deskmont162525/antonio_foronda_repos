@@ -1,0 +1,14 @@
+/* Variables */
+// :root {
+//     --blue-primary: #248AFF;
+//     --text: #4A4844;
+//     --grey-lite: #C4C4C4;
+//     --border: #E5E5E5;
+//     --white: #fff;
+//   }
+
+$blue-primary: var(--blue-primary, #248AFF);
+$text: var(--text, #4A4844);
+$grey: var(--grey, #C4C4C4);
+$border: var(--border, #E5E5E5);
+$white: var(--white, #fff);

@@ -1,0 +1,13 @@
+.Container-principal__form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    margin-top: 60px;
+    margin-left: 350px;
+  
+    &__content{
+      max-width: 500px;
+      min-width: 400px;
+    }
+  }
