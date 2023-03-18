@@ -1,0 +1,29 @@
+.divForm-container {
+    position: absolute;
+    top: 258px;
+    left: 250px;
+  
+    @media (max-width: 1080px) {
+      top: 150px;
+      left: 150px;
+    }
+  
+    @media (max-width: 768px) {
+      top: 100px;
+      left: 100px;
+    }
+  
+    .title-form {
+      width: 270px;
+      height: 30px;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 25px;
+      line-height: 30px;
+      color: #000000;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+  }
