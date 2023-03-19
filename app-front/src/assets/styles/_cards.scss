@@ -1,0 +1,184 @@
+/* Estilos para las cards */
+
+.container-card-main {
+  display: flex;
+  justify-content: center;
+  padding-left: 40px
+}
+
+.card-container {
+  @include media(768) {
+    justify-content: space-between;
+  }
+
+  @include media(600) {
+    justify-content: space-around;
+  }
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card {
+  @include media(768) {
+    min-width: 250px;
+  }
+
+  @include media(600) {
+    width: 100%;
+    max-width: none;
+  }
+
+  background-color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  max-width: 200px;
+  min-width: 130px;
+  min-height: 310px;
+  overflow: hidden;
+  border-radius: 25px;
+  margin: 15px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.596);
+  }
+
+  &__card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      width: 100%;
+      text-align: left;
+    }
+
+    &__img {
+      width: 100%;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &__content {
+      padding: 15px;
+
+      p {
+        &:nth-child(1) {
+          font-size: 12px;
+        }
+
+        &:nth-child(2) {
+          font-weight: 700;
+          font-size: 15px;
+          margin: 10px 0px;
+        }
+
+        &:nth-child(3) {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &__name {
+      display: flex;
+    }
+  }
+}
+
+.card-time-rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    img {
+      margin-right: 10px;
+    }
+  }
+
+  span {
+    display: flex;
+  }
+}
+
+/* Clases para el desplegable de las opciones */
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .btn {
+    background-color: $white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+
+    img{
+        margin-right: 8px;
+    }
+
+    a {
+      color: $text;
+      padding: 8px 12px;
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
+      font-size: 12px;
+      z-index: 2;
+
+      &:hover {
+        background-color: darken($white, 8%);
+      }
+
+      &:first-child {
+        border-bottom: 1px solid $grey;
+      }
+    }
+  }
+
+  &:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    width: max-content;
+    background-color: $white;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+}
+
+.btn-delete {
+    cursor: pointer;
+
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($white, $amount: 8%);
+      border: none;
+    }
+  }
+
+  p{
+    text-align: center;
+    font-size: 14px !important;
+    padding: 10px 0px;
+    color: $text;
+  }
+}

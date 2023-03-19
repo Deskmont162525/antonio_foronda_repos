@@ -3,30 +3,30 @@
 ###
 POST http://localhost:9000/api/products/product HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTVkZWQ4MjU1ZmEwZTMzMGZjOTNiMCIsImlhdCI6MTY3OTE1NDk5NCwiZXhwIjoxNjc5MTU4NTk0fQ.r-UUompthebex5pObooDXc-cyKjpWEN2_DXxdpqunto
 
 
 {
-  "name": "Producto de ejemplo 6",
-  "price": 19.99,
-  "rating": 4.5,
+  "name": "Producto de ejemplo alejo",
+  "price": 25,
+  "rating": 4,
   "image": "https://ejemplo.com/imagen",
-  "createdBy": "6414e88c28384c0ba3a0ebeb",
+  "createdBy": "6415ded8255fa0e330fc93b0",
   "categories": ["6414ee6045237f57bfac8928","641505073f1898ca307d4b61"]
 }
 
 ###
 GET http://localhost:9000/api/products/product HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTRlODhjMjgzODRjMGJhM2EwZWJlYiIsImlhdCI6MTY3OTEwMjA4MCwiZXhwIjoxNjc5MTA1NjgwfQ.R0N2NxUJOAk0W5ihCzRTDp3V1gQ8HkJW785We_qoSwE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTVkZWQ4MjU1ZmEwZTMzMGZjOTNiMCIsImlhdCI6MTY3OTE1NDk5NCwiZXhwIjoxNjc5MTU4NTk0fQ.r-UUompthebex5pObooDXc-cyKjpWEN2_DXxdpqunto
 
 ###productByUser
-GET http://localhost:9000/api/products/productByUser/6414e88c28384c0ba3a0ebeb HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTRlODhjMjgzODRjMGJhM2EwZWJlYiIsImlhdCI6MTY3OTEwMjA4MCwiZXhwIjoxNjc5MTA1NjgwfQ.R0N2NxUJOAk0W5ihCzRTDp3V1gQ8HkJW785We_qoSwE
+GET http://localhost:9000/api/products/productByUser/6415ded8255fa0e330fc93b0 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTVkZWQ4MjU1ZmEwZTMzMGZjOTNiMCIsImlhdCI6MTY3OTE1NDk5NCwiZXhwIjoxNjc5MTU4NTk0fQ.r-UUompthebex5pObooDXc-cyKjpWEN2_DXxdpqunto
 
 
 ###
 GET http://localhost:9000/api/products/product/6414e8a228384c0ba3a0ebef HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTRlODhjMjgzODRjMGJhM2EwZWJlYiIsImlhdCI6MTY3OTEwMjA4MCwiZXhwIjoxNjc5MTA1NjgwfQ.R0N2NxUJOAk0W5ihCzRTDp3V1gQ8HkJW785We_qoSwE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTVkZWQ4MjU1ZmEwZTMzMGZjOTNiMCIsImlhdCI6MTY3OTE1NDk5NCwiZXhwIjoxNjc5MTU4NTk0fQ.r-UUompthebex5pObooDXc-cyKjpWEN2_DXxdpqunto
 
 ###
 DELETE http://localhost:9000/api/products/product/6414e8a228384c0ba3a0ebef HTTP/1.1

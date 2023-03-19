@@ -1,0 +1,52 @@
+.m-t-10{
+    margin-top: 10px !important;
+}
+
+.m-t-20{
+    margin-top: 40px !important;
+}
+
+.m-t-r-20{
+    @include media(600){
+        margin-top: 20px ;
+    }
+}
+
+.m-r-40{
+    margin-right: 40px;
+}
+
+.m-rl-15{
+    margin: 0px 15px;
+}
+
+.p-20{
+    padding: 10px;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.link-a{
+    text-decoration: none;
+    color: $blue-primary;
+}
+
+.d-flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.d-flex-cent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-flex-sb{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+

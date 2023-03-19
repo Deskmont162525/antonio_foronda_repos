@@ -1,0 +1,16 @@
+$blue-primary: #248aff;
+$text: #4a4844;
+$grey: #c4c4c4;
+$border: #e5e5e5;
+$white: #fff;
+$grey-lite: #c4c4c4;
+$red-primary: #d61812;
+$green-primary: #5ad612;
+
+/* Variables para el responsive de los mixins */
+$breakpoints: (
+  1024: 1024px, 
+  991: 991px,
+  768: 768px,
+  600: 600px,
+);

@@ -3,10 +3,10 @@ POST http://localhost:9000/api/users/signup HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "deskmont16@outlook.es",
-  "password": "Nikola Tesla",
-  "name": "Soy el mejor",
-  "lastName": "y progresando"
+  "email": "alejo02lq@gmail.com",
+  "password": "Tesla",
+  "name": "alejo",
+  "lastName": "londoño quesada"
 }
 
 
@@ -15,8 +15,8 @@ POST http://localhost:9000/api/users/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email":"deskmont16@outlook.es",
-  "password": "Nikola Tesla"
+  "email":"alejo02lq@gmail.com",
+  "password": "Tesla"
 }
 
 
