@@ -1,10 +1,23 @@
 // Importamos el archivo de variables
 @import 'variables.scss';
+@import 'mixins.scss';
 
 
 /* Blue section */
 .blue {
     &__container {
+      @include media(991){
+        max-width: 227px;
+      }
+
+      @include media(600){
+        position: absolute;
+        max-width: none;
+        width: 100%;
+        height: auto;
+        padding: 20px 10px;
+      }
+
       position: fixed;
       top: 0;
       left: 0;
@@ -18,6 +31,10 @@
     }
   
     &__logo {
+      @include media(600){
+        margin-left: 10px;
+      }
+
       height: 40%;
       color: $white;
       font-weight: 700;
@@ -27,6 +44,19 @@
     }
   
     &__welcome-txt {
+      @include media(991){
+        margin-top: 0px;
+        margin-left: 10px;
+      }
+
+      @include media(600){
+        font-size: 25px;
+
+        p{
+          display: inline-block;
+        }
+      }
+
       color: $white;
       font-weight: 700;
       font-size: 40px;
