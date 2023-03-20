@@ -20,5 +20,12 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
-  }
+  },
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+    // Agregar process a la sección env
+    "process": true
+  },
 }
