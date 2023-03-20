@@ -1,77 +1,106 @@
 <template>
     <form class="Container-principal__form__content" @submit.prevent="submitForm">
         <h2>Enter your credentials</h2>
-        <div class="general-form__input--error">
+        <div class="general-form__input" :class="getFieldClass('email')">
             <label for="email">Email:</label>
-            <input placeholder="yourname@gmail.com" id="email" v-model="form.email" type="email">
+            <input placeholder="yourname@gmail.com" id="email" v-model="form.email" type="email"
+                @input="validateField('email')">
             <div v-if="formErrors.email" class="error">{{ formErrors.email }}</div>
         </div>
-        <div class="general-form__input--success">
-            <div class="d-flex-sb">
-                <label for="password">Contraseña:</label>
-                <a class="link-a" href="#">Forgot password?</a>
-            </div>
-            <input placeholder="smallTiger21" id="password" v-model="form.password" type="password">
+        <div class="general-form__input" :class="getFieldClass('password')">
+            <label for="password">Contraseña:</label>
+            <input placeholder="smallTiger21" id="password" v-model="form.password" type="password"
+                @input="validateField('password')">
             <div v-if="formErrors.password" class="error">{{ formErrors.password }}</div>
         </div>
-        <div class="m-t-20">
-            <input class="general-form__input__checkbox" type="checkbox">
-            <label for="">Keep me signed in</label>
-        </div>
-        <button class="btn-principal--primary" type="submit">Login</button>
-        <div class="">
-            <span>Not a member?</span> <a class="link-a" href="#">Sign up</a>
-        </div>
+        <button class="btn-principal btn-principal--primary" type="submit">Login</button>
+        <span class="error" v-if="errorMessage">{{ errorMessage }}</span>
     </form>
 </template>
   
 <script>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
+import { loginHandler } from '@/actions/userActions.js';
 
 export default {
     setup() {
         const form = reactive({
-            name: '',
             email: '',
             password: '',
-            confirmPassword: '',
         });
 
         const formErrors = reactive({
-            name: '',
             email: '',
             password: '',
-            confirmPassword: '',
         });
+        const errorMessage = ref('');
+        const validateField = (field) => {
+            switch (field) {
+                case 'email':
+                    if (!form.email) {
+                        formErrors.email = 'Por favor, ingrese su correo electrónico';
+                    } else {
+                        formErrors.email = '';
+                    }
+                    break;
+                case 'password':
+                    if (!form.password) {
+                        formErrors.password = 'Por favor, ingrese una contraseña';
+                    } else {
+                        formErrors.password = '';
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
 
-        const submitForm = () => {
+        const getFieldClass = (field) => {
+            if (formErrors[field]) {
+                return 'general-form__input--error';
+            } else if (form[field]) {
+                return 'general-form__input--success';
+            }
+            return '';
+        }
+
+        const submitForm = async () => {
+            // Capturar valores de los inputs
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
             // Validar campos requeridos
-            if (!form.email) {
-                formErrors.email = 'Por favor, ingrese su correo electrónico';
-            } else {
-                formErrors.email = '';
+            validateField('email');
+            validateField('password');
+
+            // Si hay errores, no enviar formulario
+            if (formErrors.email || formErrors.password) {
+                return;
             }
 
-            if (!form.password) {
-                formErrors.password = 'Por favor, ingrese una contraseña';
-            } else {
-                formErrors.password = '';
-            }
-
-            // Si no hay errores, enviar formulario
-            if (!Object.values(formErrors).some((error) => error)) {
-                console.log('Formulario válido. Enviando...');
+            try {
+                // Llamar a la función login
+                const token = await loginHandler(email, password);
+                if(token.code === 404){
+                    errorMessage.value = token.message;
+                }
+            } catch (error) {
+                console.error(error);
+                // Mostrar mensaje de error
             }
         };
 
         return {
             form,
             formErrors,
+            validateField,
+            getFieldClass,
             submitForm,
+            errorMessage
         };
     },
+
 };
 </script>
-
-
   
+

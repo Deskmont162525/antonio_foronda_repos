@@ -22,34 +22,40 @@ const jwt = require('jsonwebtoken');
  *       400:
  *         description: Error al crear el usuario
  */
-router.post("/signup", (req, res, next) => {
+router.post("/signup", async (req, res, next) => {
   const { name, lastName, email, password } = req.body;
-  bcrypt
-    .hash(password, 10)
-    .then((hash) => {
-      const user = userSchema({
-        email: email,
-        password: hash,
-        name: name,
-        lastName: lastName,
-      });
-
-      user
-        .save()
-        .then((result) => {
-          console.log("Usuario creado con éxito:", result);
-          res.redirect("/login");
-        })
-        .catch((err) => {
-          console.error("Error al crear usuario:", err);
-          res.redirect("/signup");
-        });
-    })
-    .catch((err) => {
-      console.error("Error al encriptar contraseña:", err);
-      res.redirect("/signup");
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new userSchema({
+      email: email,
+      password: hashedPassword,
+      name: name,
+      lastName: lastName,
     });
+    const result = await user.save();
+    console.log("Usuario creado con éxito:", result);
+    res.status(200).json({
+      message: "Usuario creado con éxito.",
+      redirect: "/login",
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(200).json({
+        message: "El correo electrónico ya está en uso.",
+        error: error,
+        redirect: "/signup",
+      });
+    } else {
+      res.status(500).json({
+        message: "Error al crear el usuario",
+        error: error,
+        redirect: "/signup",
+      });
+    }
+  }
 });
+
+
 
 router.post('/login', async (req, res) => {
   const email = req.body.email;
@@ -58,13 +64,19 @@ router.post('/login', async (req, res) => {
   try {
     const user = await userSchema.findOne({ email: email });
     if (!user) {
-      return res.status(401).json({ message: 'Correo incorrecto' });
+      return res.status(200).json({ message: 'Correo incorrecto' });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: 'Contraseña incorrecta' });
+      return res.status(200).json({ message: 'Contraseña incorrecta' });
     }
-    const token = jwt.sign({ id: user._id }, process.env.SESSION_SECRET, { expiresIn: '1h' });
+    const userTokent = {
+      id: user._id,
+      name: user.name + ' ' + user.lastName,
+      email: user.email,
+      token: user.token
+    }
+    const token = jwt.sign({ id: user }, process.env.SESSION_SECRET, { expiresIn: '1h' });
     
     user.tokens.push({ token: token }); // Agregar el nuevo token al array de tokens del usuario
     await user.save(); // Guardar el usuario actualizado en la base de datos

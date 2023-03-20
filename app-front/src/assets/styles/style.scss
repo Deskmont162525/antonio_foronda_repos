@@ -211,6 +211,9 @@
         
         input{
             border-color: $red-primary;
+            &:focus {
+              border-color: $red-primary;
+            }
         }
     }
 
@@ -219,6 +222,9 @@
         
         input{
             border-color: $green-primary;
+            &:focus {
+              border-color: $green-primary;
+            }
         }
     }
 
