@@ -60,6 +60,7 @@ router.get("/product", authMiddleware, (req, res) => {
  */
 
 router.get("/productByUser/:id", authMiddleware, (req, res) => {
+  
   const userId = req.params.id;
   productSchema
     .find({ createdBy: userId })

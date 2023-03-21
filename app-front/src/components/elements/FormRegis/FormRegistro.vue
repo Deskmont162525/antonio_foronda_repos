@@ -1,7 +1,7 @@
 <template>
   <div class="registration-form">
     <form class="Container-principal__form__content" @submit.prevent="submitForm">
-      <h2>Enter your credentials</h2>
+      <h2>Enter your datos</h2>
       <div class="general-form__input" v-bind:class="getFieldClass('name')">
         <label for="name">Nombre:</label>
         <input type="text" id="name" v-model="form.name" @input="validateForm('name')" @blur="fieldTouched.name = true">
@@ -32,6 +32,7 @@
           @blur="fieldTouched.password2 = true">
         <span class="error" v-if="formErrors.password2">{{ formErrors.password2 }}</span>
       </div>
+      <ModalLoading :isOpen="isOpen"/>
       <button class="btn-principal--primary m-t-20" type="submit">Registrarse</button>
       <span class="error" v-if="errorMessage">{{ errorMessage }}</span>
     </form>
@@ -41,115 +42,130 @@
 <script>
 import { ref } from 'vue';
 import { handleSignup } from '@/actions/userActions.js';
+import ModalLoading from '../modalLoading/ModalLoading.vue';
 
 export default {
-  data() {
-    const errorMessage = ref('');
-    const errorMessageCorreo = ref('');
-    return {
-      form: {
-        name: '',
-        lastName: '',
-        email: '',
-        password: '',
-        password2: '',
-      },
-      formValidation: {
-        name: false,
-        lastName: false,
-        email: false,
-        password: false,
-        password2: false,
-      },
-      formErrors: {},
-      fieldTouched: {},
-      errorMessage,
-      errorMessageCorreo,
-    };
-  },
-  methods: {
-    async submitForm ()  {
-      this.validateForm();
-      if (Object.keys(this.formErrors).length === 0) {
-        const response = await handleSignup(this.form);
-        console.log("desde el from", response);
-        if(response.message === "El correo electrónico ya está en uso."){
-          this.errorMessageCorreo = response.message
-        } else {
-          this.errorMessage = 'Formulario con errores';
-        }
-      } else {
-        console.log('Formulario con errores');
-        this.errorMessage = 'Formulario con errores';
-      }
+    data() {
+        const errorMessage = ref("");
+        const errorMessageCorreo = ref("");
+        const isOpen = ref();
+        return {
+            form: {
+                name: "",
+                lastName: "",
+                email: "",
+                password: "",
+                password2: "",
+            },
+            formValidation: {
+                name: false,
+                lastName: false,
+                email: false,
+                password: false,
+                password2: false,
+            },
+            formErrors: {},
+            fieldTouched: {},
+            errorMessage,
+            errorMessageCorreo,
+            isOpen,
+        };
     },
-    validateForm(field = null) {
-      this.formErrors = {};
-      if (!field || field === 'name') {
-        if (!this.form.name) {
-          this.formValidation.name = true;
-          this.formErrors.name = 'El nombre es obligatorio';
-        } else {
-          this.formValidation.name = false;
-        }
-      }
-      if (!field || field === 'lastName') {
-        if (!this.form.lastName) {
-          this.formValidation.lastName = true;
-          this.formErrors.lastName = 'El apellido es obligatorio';
-        } else {
-          this.formValidation.lastName = false;
-        }
-      }
-      if (!field || field === 'email') {
-        if (!this.form.email) {
-          this.formValidation.email = true;
-          this.formErrors.email = 'El correo electrónico es obligatorio';
-        } else if (!this.isValidEmail(this.form.email)) {
-          this.formValidation.email = true;
-          this.formErrors.email = 'El correo electrónico no es válido';
-        } else {
-          this.formValidation.email = false;
-        }
-      }
-      if (!field || field === 'password') {
-        if (!this.form.password) {
-          this.formValidation.password = true;
-          this.formErrors.password = 'La contraseña es obligatoria';
-        } else {
-          this.formValidation.password = false;
-        }
-      }
-      if (!field || field === 'password2') {
-        if (!this.form.password2) {
-          this.formValidation.password2 = true;
-          this.formErrors.password2 = 'Confirmar la contraseña es obligatorio';
-        } else if (this.form.password !== this.form.password2) {
-          this.formValidation.password2 = true;
-          this.formErrors.password2 = 'Las contraseñas no coinciden';
-        } else {
-          this.formValidation.password2 = false;
-        }
-      }
-      this.errorMessage = ""
+    methods: {
+        async submitForm() {
+            this.validateForm();
+            if (Object.keys(this.formErrors).length === 0) {
+                //activa el loading
+                this.isOpen = true;
+                const response = await handleSignup(this.form);
+                 //desactiva el loading
+                 this.isOpen = false;
+                if (response.message === "El correo electrónico ya está en uso.") {
+                    this.errorMessageCorreo = response.message;
+                }
+            }
+            else {
+                console.log("Formulario con errores");
+                this.errorMessage = "Formulario con errores";
+            }
+        },
+        validateForm(field = null) {
+            this.formErrors = {};
+            if (!field || field === "name") {
+                if (!this.form.name) {
+                    this.formValidation.name = true;
+                    this.formErrors.name = "El nombre es obligatorio";
+                }
+                else {
+                    this.formValidation.name = false;
+                }
+            }
+            if (!field || field === "lastName") {
+                if (!this.form.lastName) {
+                    this.formValidation.lastName = true;
+                    this.formErrors.lastName = "El apellido es obligatorio";
+                }
+                else {
+                    this.formValidation.lastName = false;
+                }
+            }
+            if (!field || field === "email") {
+                if (!this.form.email) {
+                    this.formValidation.email = true;
+                    this.formErrors.email = "El correo electrónico es obligatorio";
+                }
+                else if (!this.isValidEmail(this.form.email)) {
+                    this.formValidation.email = true;
+                    this.formErrors.email = "El correo electrónico no es válido";
+                }
+                else {
+                    this.formValidation.email = false;
+                }
+            }
+            if (!field || field === "password") {
+                if (!this.form.password) {
+                    this.formValidation.password = true;
+                    this.formErrors.password = "La contraseña es obligatoria";
+                }
+                else {
+                    this.formValidation.password = false;
+                }
+            }
+            if (!field || field === "password2") {
+                if (!this.form.password2) {
+                    this.formValidation.password2 = true;
+                    this.formErrors.password2 = "Confirmar la contraseña es obligatorio";
+                }
+                else if (this.form.password !== this.form.password2) {
+                    this.formValidation.password2 = true;
+                    this.formErrors.password2 = "Las contraseñas no coinciden";
+                }
+                else {
+                    this.formValidation.password2 = false;
+                }
+            }
+            this.errorMessage = "";
+        },
+        isValidEmail(email) {
+            // Aquí se puede agregar una validación más compleja si se requiere
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        },
+        getFieldClass(field) {
+            if (this.fieldTouched[field] && !this.formErrors[field]) {
+                this.formValidation[field] = true;
+                return "general-form__input--success";
+            }
+            else if (this.fieldTouched[field] && this.formErrors[field]) {
+                this.formValidation[field] = false;
+                return "general-form__input--error";
+            }
+            else if (this.fieldFocused === field) {
+                return "general-form__input--focused";
+            }
+            return "";
+        },
     },
-    isValidEmail(email) {
-      // Aquí se puede agregar una validación más compleja si se requiere
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    },
-    getFieldClass(field) {
-      if (this.fieldTouched[field] && !this.formErrors[field]) {
-        this.formValidation[field] = true;
-        return 'general-form__input--success';
-      } else if (this.fieldTouched[field] && this.formErrors[field]) {
-        this.formValidation[field] = false;
-        return 'general-form__input--error';
-      } else if (this.fieldFocused === field) {
-        return 'general-form__input--focused';
-      }
-      return '';
-    },
-  },
+    components: { ModalLoading }
 };
 </script>
 

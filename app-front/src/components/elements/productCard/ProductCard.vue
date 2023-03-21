@@ -2,11 +2,11 @@
     <div class="card">
         <div class="card__card-body">
             <div class="card__card-body__img">
-                <img :src="producto?.imagen" alt="">
+                <img :src="producto?.image" alt="">
             </div>
             <div class="card__card-body__content">
                 <div class="card__card-body__name">
-                    <p>{{ producto?.descripcion }}</p>
+                    <p>{{ producto?.name }}</p>
                     <div class="dropdown">
                         <button class="btn"><img src="../../../assets/icons/options-icons.svg" alt=""></button>
                         <div class="dropdown-content">
@@ -24,9 +24,9 @@
                         </div>
                     </div>
                 </div>
-                <p>valor: {{ producto?.valor }}</p>
+                <p>${{ producto?.price }}</p>
                 <div class="card-time-rating">
-                    <p><img src="../../../assets/icons/reloj-icon.svg" alt="">(Time)</p>
+                    <p><img src="../../../assets/icons/reloj-icon.svg" alt="">({{ horasTranscurridas }})</p>
                     <span>
                         <img src="../../../assets/icons/star-complete-icon.svg" alt="">
                         <img src="../../../assets/icons/star-complete-icon.svg" alt="">
@@ -41,6 +41,7 @@
 </template>
   
 <script>
+import { calcularTiempoTranscurrido } from '../../../helpers/funciones';
 import ModalEliminar from '../modalElimi/ModalEliminar.vue';
 
 export default {
@@ -52,9 +53,16 @@ export default {
         }
     },
     components: { ModalEliminar },
+    computed: {
+    horasTranscurridas() {
+      const horasTranscurridas = calcularTiempoTranscurrido(
+        this.producto.createdAt
+      );
+      return horasTranscurridas;
+    },
+  },
     methods: {
         handleCloseModal() {
-            console.log('El botón del Popout fue presionado');
         }
 
     }

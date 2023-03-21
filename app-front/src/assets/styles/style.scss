@@ -6,14 +6,19 @@
 @import 'utilities';
 @import 'cards';
 
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
 }
 
-.container-general{
-  @include media(600){
+head > link[rel="icon"] {
+  filter: brightness(50%) !important;
+  width: 64px !important;
+  height: 64px !important;
+}
+.container-general {
+  @include media(600) {
     padding: 170px 20px 20px 20px;
   }
 
@@ -22,12 +27,12 @@
 
 /* Sección principal */
 .Container-principal {
-  @include media(600){
+  @include media(600) {
     margin-top: 90px;
   }
 
   &__acount {
-    @include media(600){
+    @include media(600) {
       justify-content: center;
     }
 
@@ -43,16 +48,16 @@
   }
 
   &__form {
-    @include media(991){
+    @include media(991) {
       font-size: 35px;
     }
 
-    @include media(600){
+    @include media(600) {
       margin-left: 0px;
       margin-top: 0px;
       padding: 20px;
     }
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,7 +66,7 @@
     margin-left: 350px;
 
     &__content {
-      @include media(600){
+      @include media(600) {
         max-width: none;
         min-width: auto;
       }
@@ -70,7 +75,7 @@
       min-width: 400px;
     }
 
-    &__multiple-filds{
+    &__multiple-filds {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -92,7 +97,7 @@
   transition: all 0.2s;
   border: none;
 
-  &__btn-container{
+  &__btn-container {
     max-width: 300px;
   }
 
@@ -128,7 +133,7 @@
   }
 }
 
-.btn-modal{
+.btn-modal {
   display: inline-block;
 
   &--primary {
@@ -167,7 +172,6 @@
 /* Estilos para formnularios */
 
 .general-form {
-
   &__input {
     display: flex;
     flex-direction: column;
@@ -188,7 +192,7 @@
       border-radius: 4px;
       border: 2px solid $border;
 
-      &:focus{
+      &:focus {
         border: 2px solid $border;
         outline: none;
       }
@@ -198,37 +202,37 @@
       }
     }
 
-    &--multi{
-      @include media(600){
+    &--multi {
+      @include media(600) {
         width: 100%;
       }
 
       width: 48%;
     }
 
-    &--error{
-        @extend .general-form__input;
-        
-        input{
-            border-color: $red-primary;
-            &:focus {
-              border-color: $red-primary;
-            }
+    &--error {
+      @extend .general-form__input;
+
+      input {
+        border-color: $red-primary;
+        &:focus {
+          border-color: $red-primary;
         }
+      }
     }
 
-    &--success{
-        @extend .general-form__input;
-        
-        input{
-            border-color: $green-primary;
-            &:focus {
-              border-color: $green-primary;
-            }
+    &--success {
+      @extend .general-form__input;
+
+      input {
+        border-color: $green-primary;
+        &:focus {
+          border-color: $green-primary;
         }
+      }
     }
 
-    &__checkbox{
+    &__checkbox {
       width: 15px;
       height: 15px;
       margin-right: 10px;
@@ -242,13 +246,13 @@
 }
 
 /* Clase para los errores */
-.error{
+.error {
   margin-top: 10px;
   color: $red-primary;
 }
 
 /* Header */
-.header-main{
+.header-main {
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -259,10 +263,10 @@
   box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.15);
   z-index: 1;
 
-  &__search-bar{
+  &__search-bar {
     position: relative;
 
-    input{
+    input {
       padding: 10px 30px;
       max-width: 337px;
       color: $text;
@@ -275,14 +279,14 @@
       }
     }
 
-    img{
+    img {
       position: absolute;
       top: 30%;
       left: 10px;
     }
   }
 
-  &__add-btn{
+  &__add-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -290,7 +294,7 @@
     margin: 0px 20px;
     font-weight: 500;
 
-    img{
+    img {
       margin: 0px 10px;
       width: 15px;
     }
@@ -330,7 +334,7 @@
   overflow: auto;
   z-index: 2;
 
-  @include media(600){
+  @include media(600) {
     max-width: 80%;
     min-width: 50%;
   }
