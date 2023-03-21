@@ -13,7 +13,9 @@
                 @input="validateField('password')">
             <div v-if="formErrors.password" class="error">{{ formErrors.password }}</div>
         </div>
+        <ModalLoading :isOpen="isOpen"/>
         <button class="btn-principal btn-principal--primary" type="submit">Login</button>
+        
         <span class="error" v-if="errorMessage">{{ errorMessage }}</span>
     </form>
 </template>
@@ -21,85 +23,89 @@
 <script>
 import { reactive, ref } from 'vue';
 import { loginHandler } from '@/actions/userActions.js';
+import ModalLoading from '../modalLoading/ModalLoading.vue';
 
 export default {
     setup() {
         const form = reactive({
-            email: '',
-            password: '',
+            email: "",
+            password: "",
         });
-
         const formErrors = reactive({
-            email: '',
-            password: '',
+            email: "",
+            password: "",
         });
-        const errorMessage = ref('');
+        const errorMessage = ref("");
+        var isOpen =  ref(null);
         const validateField = (field) => {
             switch (field) {
-                case 'email':
+                case "email":
                     if (!form.email) {
-                        formErrors.email = 'Por favor, ingrese su correo electrónico';
-                    } else {
-                        formErrors.email = '';
+                        formErrors.email = "Por favor, ingrese su correo electrónico";
+                    }
+                    else {
+                        formErrors.email = "";
                     }
                     break;
-                case 'password':
+                case "password":
                     if (!form.password) {
-                        formErrors.password = 'Por favor, ingrese una contraseña';
-                    } else {
-                        formErrors.password = '';
+                        formErrors.password = "Por favor, ingrese una contraseña";
+                    }
+                    else {
+                        formErrors.password = "";
                     }
                     break;
                 default:
                     break;
             }
-        }
-
+        };
         const getFieldClass = (field) => {
             if (formErrors[field]) {
-                return 'general-form__input--error';
-            } else if (form[field]) {
-                return 'general-form__input--success';
+                return "general-form__input--error";
             }
-            return '';
-        }
-
-        const submitForm = async () => {
+            else if (form[field]) {
+                return "general-form__input--success";
+            }
+            return "";
+        };
+        const submitForm = async () => {            
             // Capturar valores de los inputs
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
             // Validar campos requeridos
-            validateField('email');
-            validateField('password');
-
+            validateField("email");
+            validateField("password");
             // Si hay errores, no enviar formulario
             if (formErrors.email || formErrors.password) {
                 return;
             }
-
             try {
+                //activa el modal
+                isOpen.value = true;
                 // Llamar a la función login
                 const token = await loginHandler(email, password);
-                if(token.code === 404){
+                //desactiva el modal
+                isOpen.value = false;
+                if (token.code === 404) {
                     errorMessage.value = token.message;
                 }
-            } catch (error) {
+            }
+            catch (error) {
                 console.error(error);
                 // Mostrar mensaje de error
             }
         };
-
         return {
             form,
             formErrors,
             validateField,
             getFieldClass,
             submitForm,
-            errorMessage
+            errorMessage,
+            isOpen,
         };
     },
-
+    components: { ModalLoading }
 };
 </script>
   

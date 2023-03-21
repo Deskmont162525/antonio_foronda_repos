@@ -1,6 +1,6 @@
 export function isAuthenticated() {
     const cookies = document.cookie.split(';');
-    const cookieName = 'usuarioOMG=';
+    const cookieName = 'authUsuarioOMG=';
     let isAuthenticated = false;
     
     for (let i = 0; i < cookies.length; i++) {

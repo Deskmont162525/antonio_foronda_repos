@@ -6,9 +6,10 @@ const userRoute = require("./routes/userRoutes");
 const rolRoute = require("./routes/rolRoutes");
 const productRoute = require("./routes/productRoutes");
 const categoryRoute = require("./routes/categoryRoutes");
+const imagesRoute = require("./routes/imagesRoutes");
+
 const path = require("path");
 const flash = require('connect-flash');
-const cors = require('cors'); // Importa el paquete cors
 
 // swagger
 const swaggerUI = require("swagger-ui-express");
@@ -38,7 +39,6 @@ const port = process.env.PORT || 9000;
 const swaggerSpec = swaggerJSDocs(options);
 
 // middlewares
-app.use(cors());
 app.use(express.json());
 app.use(flash());
 app.use(session({
@@ -47,9 +47,7 @@ app.use(session({
   saveUninitialized: false
 })); // Agregamos la configuración de sesión
 
-
-
-
+app.use('/api/images', imagesRoute);
 
 app.use("/api/users", userRoute);
 app.use("/api/rols", rolRoute);

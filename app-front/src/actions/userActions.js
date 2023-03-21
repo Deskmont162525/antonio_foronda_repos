@@ -5,13 +5,21 @@ export const loginHandler = async (email, password) => {
     // Llamar a la función login
     const token = await login(email, password)
 
+
     // Decodificar el token
     if (token !== undefined) {
       const decodedToken = JSON.parse(atob(token.split('.')[1]))
-
-      // Crear la cookie
-      document.cookie = `usuarioOMG=${JSON.stringify(decodedToken)}; path=/`
-
+      // const ultimoToken = decodedToken.id.tokens[decodedToken.id.tokens.length-1];
+     const userAuthToken = {
+      dataUser:decodedToken,
+      token: token
+     }
+      // Crear la cookie 
+      $cookies.set("authUsuarioOMG", JSON.stringify(userAuthToken), {
+        expires:"1h",
+        path: "/"
+      })
+      
       // Redirigir al usuario a la ruta /shop
       window.location.href = '/shop'
     } else {
@@ -41,6 +49,10 @@ export const handleSignup = async (data) => {
   }
   try {
     const response = await signup(dataSend)
+    if(response.message === "Usuario creado con éxito."){
+      // Redirigir al usuario a la ruta /shop
+      window.location.href = response.redirect
+    }
     console.log('Usuario creado correctamente', response)
     return response;
   } catch (error) {

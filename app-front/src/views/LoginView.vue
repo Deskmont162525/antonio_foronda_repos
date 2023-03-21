@@ -5,7 +5,9 @@
         <section class="blue__container">
             <div class="blue__logo">
                 <span>Logo</span>
-            </div>
+                <img :src="logo" alt="" />
+                
+            </div>            
             <div class="blue__welcome-txt">
                 <p>¡Welcome!</p>
                 <p>Sign to start</p>
@@ -28,16 +30,16 @@
 
 <script>
 import FormRegistro from '../components/elements/formRegis/FormRegistro.vue';
-
 import FormLogin from '@/components/elements/formLogin/FormLogin.vue';
-
 import NavBarLogin from '../components/elements/navbar/NavBarLogin.vue';
+import imageLogo from '@/assets/images/logos/logo.svg';
 
 
 export default {
     data() {
         return {
             state: false,
+            logo: imageLogo
         };
     },
     methods: {

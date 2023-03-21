@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const userSchema = require("../models/userModel");
 const jwt = require('jsonwebtoken');
-
 /**
  * @swagger
  * /users:
@@ -33,7 +32,6 @@ router.post("/signup", async (req, res, next) => {
       lastName: lastName,
     });
     const result = await user.save();
-    console.log("Usuario creado con éxito:", result);
     res.status(200).json({
       message: "Usuario creado con éxito.",
       redirect: "/login",
@@ -76,7 +74,7 @@ router.post('/login', async (req, res) => {
       email: user.email,
       token: user.token
     }
-    const token = jwt.sign({ id: user }, process.env.SESSION_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: userTokent }, process.env.SESSION_SECRET, { expiresIn: '1h' });
     
     user.tokens.push({ token: token }); // Agregar el nuevo token al array de tokens del usuario
     await user.save(); // Guardar el usuario actualizado en la base de datos
